@@ -8,11 +8,11 @@ const api = require("./api");
 const app = express();
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "",
   })
 );
 // morgan is a logger that logs all the requests that come to our server used right after any security features and before what we want logged
-app.use(morgan("combined"));
+app.use(morgan(""));
 // using cors instead of this
 // app.use((req, res, next) => {
 //   res.set("Access-Control-Allow-Origin", "http://localhost:3000");
