@@ -1,8 +1,9 @@
 const http = require("http");
 const mongoose = require("mongoose");
+require("dotenv").config();
 
 const port = process.env.PORT || 8000;
-
+const dbConnection = process.env.DB_URL;
 const app = require("./app");
 
 const { loadPlanetsData } = require("./models/planets.model");
@@ -12,7 +13,7 @@ const server = http.createServer(app);
 
 async function startServer() {
   mongoose
-    .connect("mongodb+srv://Matthew:Admin@cluster0.tnqf2qi.mongodb.net/")
+    .connect(dbConnection)
     .then(() => {
       console.log("MongoDB Connected...");
       server.listen(port, () => {
