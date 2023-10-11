@@ -7,9 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "client": "npm run start --prefix client",
     "server": "npm run watch --prefix server",
-    "watch": "npm run client & npm run server",
-    "deploy": "npm run build --prefix client && npm run start --prefix server",
-    "deploy-cluster": "npm run build --prefix client && npm run cluster --prefix server"
+    "watch": "concurrently \"npm run client\" \"npm run server\"",
+    "deploy": "concurrently \"npm run build --prefix client\" \"npm run start --prefix server\"",
+    "deploy-cluster": " concurrently \"npm run build --prefix client\" \"npm run cluster --prefix server\""
   },
   "author": "",
   "license": "ISC",
