@@ -12,7 +12,7 @@ const server = http.createServer(app);
 
 async function startServer() {
   mongoose
-    .connect("mongodb+srv://Matthew:Admin@cluster0.dpadqa4.mongodb.net/")
+    .connect("mongodb+srv://Matthew:Admin@cluster0.tnqf2qi.mongodb.net/")
     .then(() => {
       console.log("MongoDB Connected...");
       server.listen(port, () => {
