@@ -1,28 +1,24 @@
 const http = require("http");
-const mongoose = require("mongoose");
+const { dbInit } = require("./services/mongo");
 require("dotenv").config();
 
 const port = process.env.PORT || 8000;
-const dbConnection = process.env.DB_URL;
+
 const app = require("./app");
+
+const server = http.createServer(app);
 
 const { loadPlanetsData } = require("./models/planets.model");
 const { loadLaunchData } = require("./models/launches.model");
 
-const server = http.createServer(app);
-
 async function startServer() {
-  mongoose
-    .connect(dbConnection)
-    .then(() => {
-      console.log("MongoDB Connected...");
-      server.listen(port, () => {
-        console.log(`Server is up on port ${port}`);
-      });
-    })
-    .catch((err) => console.log(err));
+  await dbInit();
   await loadPlanetsData();
   await loadLaunchData();
+
+  server.listen(port, () => {
+    console.log(`Server listening on port ${port}`);
+  });
 }
 
 startServer();
