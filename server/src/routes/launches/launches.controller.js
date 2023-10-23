@@ -6,10 +6,13 @@ const {
 } = require("../../models/launches.model");
 const Launches = require("../../models/launches.mongo");
 
+const { getPagination } = require("../../services/query");
+
 const httpGetAllLaunches = async (req, res) => {
   try {
-    const launches = await Launches.find({}, { _id: 0, __v: 0 });
-    return res.status(200).json(launches);
+    const { skip, limit } = getPagination(req.query);
+
+    return res.status(200).json(await getAllLaunches(skip, limit));
   } catch (error) {
     console.error(error);
   }
